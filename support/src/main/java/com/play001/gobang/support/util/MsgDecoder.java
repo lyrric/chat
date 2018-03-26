@@ -1,6 +1,6 @@
 package com.play001.gobang.support.util;
 
-import com.play001.gobang.support.entity.BaseMsg;
+import com.play001.gobang.support.entity.msg.BaseMsg;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
