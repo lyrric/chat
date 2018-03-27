@@ -1,21 +1,21 @@
-package com.play001.gobang.support.entity.msg.user;
+package com.play001.gobang.support.entity.msg.client;
 
 import com.play001.gobang.support.annotation.MsgAnnotation;
-import com.play001.gobang.support.entity.msg.BaseMsg;
+import com.play001.gobang.support.entity.Client;
 import com.play001.gobang.support.entity.msg.server.ServerMsgType;
 
 /**
  * 登陆请求
  */
-@MsgAnnotation(msgType = ServerMsgType.LOGIN_RES)
-public class ReqLoginMsg extends BaseMsg {
+@MsgAnnotation(msgType = ClientMsgType.LOGIN_REQ)
+public class LoginReqMsg extends ClientBaseMsg {
 
     private String username;
-    public ReqLoginMsg() {
+    public LoginReqMsg() {
     }
 
-    public ReqLoginMsg(String username, Long time) {
-        super(ServerMsgType.LOGIN_RES, time);
+    public LoginReqMsg(String username, Long time, Client user) {
+        super(ServerMsgType.LOGIN_RES, time, user);
         this.username = username;
     }
 

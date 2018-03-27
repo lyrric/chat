@@ -1,4 +1,6 @@
-package com.play001.gobang.support.entity.msg;
+package com.play001.gobang.support.entity.msg.client;
+
+import com.play001.gobang.support.entity.Client;
 
 import java.io.Serializable;
 
@@ -6,18 +8,18 @@ import java.io.Serializable;
  * 消息基类,状态,创建时间,消息类型
  * 必须实现Serializable接口,不然无法传递消息
  */
-public class BaseMsg implements Serializable{
+public class ClientBaseMsg implements Serializable{
 
-    //errMsg 不为null或者空则表示有错
-    private String errMsg;
+    private Client user;
     private short type;
     private long time;
-    public BaseMsg() {
+    public ClientBaseMsg() {
     }
 
-    public BaseMsg(short type, long time) {
+    public ClientBaseMsg(short type, long time, Client user) {
         this.type = type;
         this.time = time;
+        this.user = user;
     }
 
     public short getType() {
@@ -36,11 +38,11 @@ public class BaseMsg implements Serializable{
         this.time = time;
     }
 
-    public String getErrMsg() {
-        return errMsg;
+    public Client getUser() {
+        return user;
     }
 
-    public void setErrMsg(String errMsg) {
-        this.errMsg = errMsg;
+    public void setUser(Client user) {
+        this.user = user;
     }
 }

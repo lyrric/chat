@@ -1,21 +1,16 @@
-package com.play001.gobang.support.entity.msg.user;
+package com.play001.gobang.support.entity.msg.server;
 
 import com.play001.gobang.support.annotation.MsgAnnotation;
-import com.play001.gobang.support.entity.msg.BaseMsg;
-import com.play001.gobang.support.entity.msg.server.ServerMsgType;
 
 /**
  * 返回key给用户
  */
 @MsgAnnotation(msgType = ServerMsgType.LOGIN_RES)
-public class LoginMsg extends BaseMsg {
+public class LoginResMsg extends ServerBaseMsg {
 
     private String userKey;
 
-    public LoginMsg() {
-    }
-
-    public LoginMsg(String userKey, Long time) {
+    public LoginResMsg(String userKey, Long time) {
         super(ServerMsgType.LOGIN_RES, time);
         this.userKey = userKey;
     }

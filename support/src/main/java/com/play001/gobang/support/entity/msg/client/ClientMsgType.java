@@ -1,9 +1,9 @@
-package com.play001.gobang.support.entity.msg.user;
+package com.play001.gobang.support.entity.msg.client;
 
 /**
  * server来自用户的消息类型
  */
-public class UserMsgType {
+public class ClientMsgType {
     //登陆
     public static final short LOGIN_REQ = 1;
     //进入房间

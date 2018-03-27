@@ -1,6 +1,6 @@
 package com.play001.gobang.support.util;
 
-import com.play001.gobang.support.entity.msg.BaseMsg;
+import com.play001.gobang.support.entity.msg.server.ServerBaseMsg;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
@@ -54,7 +54,7 @@ public class MsgDecoder extends ByteToMessageDecoder  {
         //反序列化
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(data);
         ObjectInputStream ois = new ObjectInputStream(byteArrayInputStream);
-        BaseMsg msg = (BaseMsg)ois.readObject();
+        ServerBaseMsg msg = (ServerBaseMsg)ois.readObject();
         out.add(msg);
     }
 }

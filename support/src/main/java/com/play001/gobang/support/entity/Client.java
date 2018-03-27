@@ -1,9 +1,15 @@
 package com.play001.gobang.support.entity;
 
-public class User {
+import io.netty.channel.unix.Socket;
+
+import java.nio.channels.SocketChannel;
+
+public class Client {
     private String username;
     private String userKey;
-
+    private SocketChannel socketChannel;
+    //连接时间
+    private Long time;
     public String getUsername() {
         return username;
     }
@@ -18,5 +24,13 @@ public class User {
 
     public void setUserKey(String userKey) {
         this.userKey = userKey;
+    }
+
+    public SocketChannel getSocketChannel() {
+        return socketChannel;
+    }
+
+    public void setSocketChannel(SocketChannel socketChannel) {
+        this.socketChannel = socketChannel;
     }
 }
