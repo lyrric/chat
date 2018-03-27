@@ -7,20 +7,11 @@ import com.play001.gobang.support.util.MsgEncoder;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.handler.codec.LineBasedFrameDecoder;
-import io.netty.handler.codec.serialization.ClassResolvers;
-import io.netty.handler.codec.serialization.ObjectDecoder;
-import io.netty.handler.codec.serialization.ObjectEncoder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 
-@Component
 public class ClientChannelInitializer extends ChannelInitializer<SocketChannel>{
 
-    @Autowired
     private ExceptionHandler exceptionHandler;
-    @Autowired
     private OnReadHandler goOnlineHandler;
 
     @Override
