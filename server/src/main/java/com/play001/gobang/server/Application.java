@@ -43,8 +43,8 @@ public class Application {
                     .childOption(ChannelOption.SO_KEEPALIVE, true);
 
             ChannelFuture future = bootstrap.bind(port).sync();
-            future.channel().closeFuture().sync();
 
+            future.channel().closeFuture().sync();
         }catch (Exception e){
             e.printStackTrace();
         }finally {
