@@ -1,7 +1,7 @@
 package com.play001.gobang.support.entity.msg.client;
 
 import com.play001.gobang.support.annotation.MsgAnnotation;
-import com.play001.gobang.support.entity.Client;
+import com.play001.gobang.support.entity.User;
 import com.play001.gobang.support.entity.msg.server.ServerBaseMsg;
 
 /**
@@ -10,13 +10,13 @@ import com.play001.gobang.support.entity.msg.server.ServerBaseMsg;
 @MsgAnnotation(msgType = ClientMsgType.TEXT)
 public class ClientTextMsg extends ServerBaseMsg {
 
-    private Client formUser;
+    private User formUser;
     private String text;
 
     public ClientTextMsg() {
     }
 
-    public ClientTextMsg(long time, Client formUser, String text) {
+    public ClientTextMsg(long time, User formUser, String text) {
         super(ClientMsgType.TEXT, time);
         this.formUser = formUser;
         this.text = text;
@@ -30,11 +30,19 @@ public class ClientTextMsg extends ServerBaseMsg {
         this.text = text;
     }
 
-    public Client getFormUser() {
+    public User getFormUser() {
         return formUser;
     }
 
-    public void setFormUser(Client formUser) {
+    public void setFormUser(User formUser) {
         this.formUser = formUser;
+    }
+
+    @Override
+    public String toString() {
+        return "ClientTextMsg{" +
+                "formUser=" + formUser +
+                ", text='" + text + '\'' +
+                '}';
     }
 }

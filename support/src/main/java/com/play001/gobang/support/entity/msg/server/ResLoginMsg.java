@@ -24,4 +24,11 @@ public class ResLoginMsg extends ServerBaseMsg {
     public void setUserKey(String userKey) {
         this.userKey = userKey;
     }
+
+    @Override
+    public String toString() {
+        return "ResLoginMsg{" +
+                "userKey='" + userKey + '\'' +
+                '}';
+    }
 }

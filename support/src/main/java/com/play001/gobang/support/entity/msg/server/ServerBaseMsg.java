@@ -43,4 +43,13 @@ public class ServerBaseMsg implements Serializable{
     public void setErrMsg(String errMsg) {
         this.errMsg = errMsg;
     }
+
+    @Override
+    public String toString() {
+        return "ServerBaseMsg{" +
+                "errMsg='" + errMsg + '\'' +
+                ", type=" + type +
+                ", time=" + time +
+                '}';
+    }
 }

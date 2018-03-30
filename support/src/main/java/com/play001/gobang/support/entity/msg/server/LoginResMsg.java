@@ -22,4 +22,11 @@ public class LoginResMsg extends ServerBaseMsg {
     public void setUserKey(String userKey) {
         this.userKey = userKey;
     }
+
+    @Override
+    public String toString() {
+        return "LoginResMsg{" +
+                "userKey='" + userKey + '\'' +
+                '}';
+    }
 }

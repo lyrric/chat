@@ -1,6 +1,6 @@
 package com.play001.gobang.support.entity.msg.client;
 
-import com.play001.gobang.support.entity.Client;
+import com.play001.gobang.support.entity.User;
 
 import java.io.Serializable;
 
@@ -10,16 +10,15 @@ import java.io.Serializable;
  */
 public class ClientBaseMsg implements Serializable{
 
-    private Client user;
+    private User user;
     private short type;
     private long time;
     public ClientBaseMsg() {
     }
 
-    public ClientBaseMsg(short type, long time, Client user) {
+    public ClientBaseMsg(short type, long time) {
         this.type = type;
         this.time = time;
-        this.user = user;
     }
 
     public short getType() {
@@ -38,11 +37,20 @@ public class ClientBaseMsg implements Serializable{
         this.time = time;
     }
 
-    public Client getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Client user) {
+    public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "ClientBaseMsg{" +
+                "user=" + user +
+                ", type=" + type +
+                ", time=" + time +
+                '}';
     }
 }

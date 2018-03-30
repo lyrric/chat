@@ -65,7 +65,7 @@ public class ClassUtil {
      * @param basePackage 扫描路径
      */
     public static void initTypeToMsgExecClassMap(String basePackage) throws Exception {
-        logger.info("typeToExecutorClassMap, 包路径:"+basePackage);
+        logger.info("开始初始化typeToExecutorClassMap, 包路径:"+basePackage);
         typeToExecutorClassMap = new HashMap<>();
         List<String> classNameList = getClassName(basePackage);
         ClassLoader loader = ClassLoader.getSystemClassLoader();
@@ -81,7 +81,7 @@ public class ClassUtil {
             throw new Exception("在"+basePackage+"下,没有找到任何带MsgAnnotation注解的包");
         }
 
-        logger.info("typeToExecutorClassMap, 共加载" + typeToMsgClassMap.size());
+        logger.info("初始化typeToExecutorClassMap完成, 共加载" + typeToMsgClassMap.size());
     }
 
     /**
@@ -93,6 +93,7 @@ public class ClassUtil {
         List<String> classNameList = new LinkedList<>();
         //获取路径名
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
+
         String packagePath = basePackage.replace(".", "/");
         URL url = loader.getResource(packagePath);
         if(url == null){
