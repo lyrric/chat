@@ -71,6 +71,25 @@ public class GameService {
             return gameData.getPlayer2().getUsername();
         }
     }
+    //设置用户准备
+    public static void setUserReady(Integer roomId,String username, boolean isReady){
+        ServerGameData gameData = gameDataMap.get(roomId);
+        if(gameData != null){
+            Player player = gameData.getByUsername(username);
+            if(player != null){
+                player.setReady(isReady);
+            }
+        }
+    }
+    //获取房间用户数量
+    public static int getPlayerCount(Integer roomId){
+        return gameDataMap.get(roomId).playerCount();
+    }
+    //判断双方是否都已经准备了
+    public static boolean isAllReady(Integer roomId){
+        ServerGameData gameData = gameDataMap.get(roomId);
+        return (gameData.getPlayer1().getReady() && gameData.getPlayer2().getReady());
+    }
     public static ServerGameData getGameData(Integer roomId){
         return gameDataMap.get(roomId);
     }

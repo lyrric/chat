@@ -1,7 +1,6 @@
 package com.play001.gobang.server.service;
 
 import com.play001.gobang.support.entity.Room;
-import com.play001.gobang.support.entity.msg.server.RoomEnterResMsg;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

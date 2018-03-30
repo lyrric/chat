@@ -1,13 +1,9 @@
 package com.play001.gobang.server.exec;
 
 import com.play001.gobang.server.service.GameService;
-import com.play001.gobang.server.service.RoomService;
 import com.play001.gobang.support.annotation.MsgAnnotation;
 import com.play001.gobang.support.entity.msg.client.ClientMsgType;
-import com.play001.gobang.support.entity.msg.client.GameDataReqMsg;
 import com.play001.gobang.support.entity.msg.server.GameDataResMsg;
-import com.play001.gobang.support.entity.msg.server.RoomListResMsg;
-import com.play001.gobang.support.entity.msg.server.ServerMsgType;
 import org.apache.log4j.Logger;
 
 
@@ -24,8 +20,7 @@ public class GameDataReqExecutor extends BaseExecutor {
     public void run() {
         GameDataResMsg resMsg = new GameDataResMsg(System.currentTimeMillis());
         try {
-            GameDataReqMsg reqMsg = (GameDataReqMsg)baseMsg;
-            resMsg.setGameData(GameService.getGameData(reqMsg.getUser().getRoomId()));
+            resMsg.setGameData(GameService.getGameData(baseMsg.getUser().getRoomId()));
         }catch (Exception e){
             e.printStackTrace();
             resMsg.setErrMsg("获取房间数据失败!");

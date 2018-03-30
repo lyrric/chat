@@ -5,10 +5,10 @@ import com.play001.gobang.server.service.GameService;
 import com.play001.gobang.server.service.RoomService;
 import com.play001.gobang.support.annotation.MsgAnnotation;
 import com.play001.gobang.support.entity.Room;
+import com.play001.gobang.support.entity.msg.client.ClientBaseMsg;
 import com.play001.gobang.support.entity.msg.client.ClientMsgType;
-import com.play001.gobang.support.entity.msg.client.RoomEnterReqMsg;
-import com.play001.gobang.support.entity.msg.server.GameDataResMsg;
-import com.play001.gobang.support.entity.msg.server.RoomEnterResMsg;
+import com.play001.gobang.support.entity.msg.server.ServerBaseMsg;
+import com.play001.gobang.support.entity.msg.server.ServerMsgType;
 import com.play001.gobang.support.entity.msg.server.UserEnterMsg;
 import io.netty.channel.Channel;
 import org.apache.log4j.Logger;
@@ -24,9 +24,9 @@ public class RoomEnterReqExecutor extends BaseExecutor {
 
     @Override
     public void run() {
-        RoomEnterResMsg resMsg = new RoomEnterResMsg(System.currentTimeMillis());
+        ServerBaseMsg resMsg = new ServerBaseMsg(ServerMsgType.ROOM_ENTER_RES, System.currentTimeMillis());
         try {
-            RoomEnterReqMsg reqMsg = (RoomEnterReqMsg)baseMsg;
+            ClientBaseMsg reqMsg = (ClientBaseMsg)baseMsg;
             String username =  reqMsg.getUser().getUsername();
             Integer roomId = reqMsg.getUser().getRoomId();
             //判断房间是否存在
