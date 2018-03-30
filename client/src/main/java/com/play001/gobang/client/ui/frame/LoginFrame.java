@@ -1,7 +1,7 @@
 package com.play001.gobang.client.ui.frame;
 
 import com.play001.gobang.client.service.factory.ServiceFactory;
-import com.play001.gobang.client.ui.UiFactory;
+import com.play001.gobang.client.ui.UIFactory;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -93,7 +93,7 @@ public class LoginFrame extends JFrame{
         JOptionPane.showMessageDialog(null,"登陆成功", "提示", JOptionPane.INFORMATION_MESSAGE);
         this.setVisible(false);
         //显示房间输入
-        UiFactory.getRoomFrame().setVisible(true);
+        UIFactory.getRoomFrame().setVisible(true);
     }
 
 }

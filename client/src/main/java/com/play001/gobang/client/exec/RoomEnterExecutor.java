@@ -1,13 +1,9 @@
 package com.play001.gobang.client.exec;
 
-import com.play001.gobang.client.service.UserService;
 import com.play001.gobang.client.service.factory.ServiceFactory;
-import com.play001.gobang.client.ui.UiFactory;
-import com.play001.gobang.client.ui.frame.LoginFrame;
+import com.play001.gobang.client.ui.UIFactory;
 import com.play001.gobang.client.ui.frame.RoomFrame;
 import com.play001.gobang.support.annotation.MsgAnnotation;
-import com.play001.gobang.support.entity.msg.server.LoginResMsg;
-import com.play001.gobang.support.entity.msg.server.RoomEnterResMsg;
 import com.play001.gobang.support.entity.msg.server.ServerMsgType;
 import org.apache.log4j.Logger;
 
@@ -23,7 +19,7 @@ public class RoomEnterExecutor extends BaseExecutor {
 
     @Override
     public void run() {
-        RoomFrame roomFrame = UiFactory.getRoomFrame();
+        RoomFrame roomFrame = UIFactory.getRoomFrame();
         if(baseMsg.getErrMsg() != null){
             logger.info("进入房间失败:"+baseMsg.getErrMsg());
             ServiceFactory.getUserService().getUser().setRoomId(null);

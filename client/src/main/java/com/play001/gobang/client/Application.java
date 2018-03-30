@@ -1,13 +1,8 @@
 package com.play001.gobang.client;
 
-import com.play001.gobang.client.ui.UiFactory;
-import com.play001.gobang.client.ui.frame.LoginFrame;
-import com.play001.gobang.client.ui.frame.RoomFrame;
+import com.play001.gobang.client.ui.UIFactory;
 import com.play001.gobang.support.util.ClassUtil;
-import io.netty.channel.socket.SocketChannel;
 import org.apache.log4j.Logger;
-
-import java.net.URL;
 
 /**
  * spring 启动
@@ -26,6 +21,6 @@ public class Application {
         ClassUtil.initTypeToMsgExecClassMap("com.play001.gobang.client.exec");
 
 
-        UiFactory.getLoginFrame().setVisible(true);
+        UIFactory.getLoginFrame().setVisible(true);
     }
 }

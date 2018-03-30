@@ -1,7 +1,7 @@
 package com.play001.gobang.client.service;
 
 import com.play001.gobang.client.service.factory.ServiceFactory;
-import com.play001.gobang.client.ui.UiFactory;
+import com.play001.gobang.client.ui.UIFactory;
 import com.play001.gobang.support.entity.User;
 import com.play001.gobang.support.entity.msg.client.LoginReqMsg;
 import org.apache.log4j.Logger;
@@ -24,7 +24,7 @@ public class LoginService {
             nettyService.send(msg);
         }catch (Exception e){
             e.printStackTrace();
-            UiFactory.getLoginFrame().loginFailed("登陆失败");
+            UIFactory.getLoginFrame().loginFailed("登陆失败");
         }
 
     }

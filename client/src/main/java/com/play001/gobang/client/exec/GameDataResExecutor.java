@@ -1,11 +1,9 @@
 package com.play001.gobang.client.exec;
 
-import com.play001.gobang.client.ui.UiFactory;
+import com.play001.gobang.client.ui.UIFactory;
 import com.play001.gobang.client.ui.frame.GameFrame;
-import com.play001.gobang.client.ui.frame.RoomFrame;
 import com.play001.gobang.support.annotation.MsgAnnotation;
 import com.play001.gobang.support.entity.msg.server.GameDataResMsg;
-import com.play001.gobang.support.entity.msg.server.RoomListResMsg;
 import com.play001.gobang.support.entity.msg.server.ServerMsgType;
 import org.apache.log4j.Logger;
 
@@ -20,7 +18,7 @@ public class GameDataResExecutor extends BaseExecutor {
 
     @Override
     public void run() {
-        GameFrame gameFrame = UiFactory.getGameFrame();
+        GameFrame gameFrame = UIFactory.getGameFrame();
         if(baseMsg.getErrMsg() != null){
             logger.info("获取游戏数据失败:"+baseMsg.getErrMsg());
             gameFrame.getGameDataFailed(baseMsg.getErrMsg());

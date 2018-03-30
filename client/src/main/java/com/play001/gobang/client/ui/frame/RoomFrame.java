@@ -1,7 +1,7 @@
 package com.play001.gobang.client.ui.frame;
 
 import com.play001.gobang.client.service.factory.ServiceFactory;
-import com.play001.gobang.client.ui.UiFactory;
+import com.play001.gobang.client.ui.UIFactory;
 import com.play001.gobang.support.entity.Room;
 
 import javax.swing.*;
@@ -154,7 +154,7 @@ public class RoomFrame extends JFrame{
         JOptionPane.showMessageDialog(null,"进入成功", "提示", JOptionPane.INFORMATION_MESSAGE);
         this.setVisible(false);
         //显示游戏界面
-        GameFrame gameFrame = UiFactory.getGameFrame();
+        GameFrame gameFrame = UIFactory.getGameFrame();
         gameFrame.init();
         this.setVisible(false);
         gameFrame.setVisible(true);

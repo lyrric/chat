@@ -7,7 +7,7 @@ import com.play001.gobang.client.ui.frame.RoomFrame;
 /**
  * 面板工厂类
  */
-public class UiFactory {
+public class UIFactory {
     private static LoginFrame loginFrame = null;
     private static RoomFrame roomFrame  = null;
     private static GameFrame gameFrame  = null;

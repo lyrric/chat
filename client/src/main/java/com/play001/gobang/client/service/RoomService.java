@@ -1,12 +1,10 @@
 package com.play001.gobang.client.service;
 
 import com.play001.gobang.client.service.factory.ServiceFactory;
-import com.play001.gobang.client.ui.UiFactory;
+import com.play001.gobang.client.ui.UIFactory;
 import com.play001.gobang.support.entity.User;
-import com.play001.gobang.support.entity.msg.client.LoginReqMsg;
-import com.play001.gobang.support.entity.msg.client.RoomCreateReqMsg;
-import com.play001.gobang.support.entity.msg.client.RoomEnterReqMsg;
-import com.play001.gobang.support.entity.msg.client.RoomListReqMsg;
+import com.play001.gobang.support.entity.msg.client.ClientBaseMsg;
+import com.play001.gobang.support.entity.msg.client.ClientMsgType;
 import org.apache.log4j.Logger;
 
 public class RoomService {
@@ -18,11 +16,12 @@ public class RoomService {
      */
     public void getRoomList(){
         try {
-            RoomListReqMsg msg = new RoomListReqMsg(System.currentTimeMillis());
-            ServiceFactory.getNettyService().send(msg);
+
+            ClientBaseMsg reqMsg = new ClientBaseMsg(ClientMsgType.ROOM_LIST_REQ, System.currentTimeMillis());
+            ServiceFactory.getNettyService().send(reqMsg);
         }catch (Exception e){
             e.printStackTrace();
-            UiFactory.getRoomFrame().enterFailed("刷新房间失败");
+            UIFactory.getRoomFrame().enterFailed("刷新房间失败");
         }
     }
     /**
@@ -30,11 +29,11 @@ public class RoomService {
      */
     public void create(){
         try {
-            RoomCreateReqMsg msg = new RoomCreateReqMsg(System.currentTimeMillis());
-            ServiceFactory.getNettyService().send(msg);
+            ClientBaseMsg reqMsg = new ClientBaseMsg(ClientMsgType.ROOM_CREATE_REQ, System.currentTimeMillis());
+            ServiceFactory.getNettyService().send(reqMsg);
         }catch (Exception e){
             e.printStackTrace();
-            UiFactory.getRoomFrame().enterFailed("创建房间失败");
+            UIFactory.getRoomFrame().enterFailed("创建房间失败");
         }
     }
     /**
@@ -43,12 +42,12 @@ public class RoomService {
     public void enter(Integer roomId){
         User user =  ServiceFactory.getUserService().getUser();
         try {
-            RoomEnterReqMsg msg = new RoomEnterReqMsg(System.currentTimeMillis());
+            ClientBaseMsg reqMsg = new ClientBaseMsg(ClientMsgType.ROOM_ENTER_REQ, System.currentTimeMillis());
             user.setRoomId(roomId);
-            ServiceFactory.getNettyService().send(msg);
+            ServiceFactory.getNettyService().send(reqMsg);
         }catch (Exception e){
             e.printStackTrace();
-            UiFactory.getRoomFrame().enterFailed("进入房间失败");
+            UIFactory.getRoomFrame().enterFailed("进入房间失败");
         }
     }
 }

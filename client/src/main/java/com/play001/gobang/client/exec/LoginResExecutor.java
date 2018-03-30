@@ -2,7 +2,7 @@ package com.play001.gobang.client.exec;
 
 import com.play001.gobang.client.service.factory.ServiceFactory;
 import com.play001.gobang.client.service.UserService;
-import com.play001.gobang.client.ui.UiFactory;
+import com.play001.gobang.client.ui.UIFactory;
 import com.play001.gobang.client.ui.frame.LoginFrame;
 import com.play001.gobang.support.annotation.MsgAnnotation;
 import com.play001.gobang.support.entity.msg.server.LoginResMsg;
@@ -22,7 +22,7 @@ public class LoginResExecutor extends BaseExecutor {
     @Override
     public void run() {
         logger.info("LoginResExecutor执行");
-        LoginFrame loginFrame = UiFactory.getLoginFrame();
+        LoginFrame loginFrame = UIFactory.getLoginFrame();
         if(baseMsg.getErrMsg() != null){
             loginFrame.loginFailed(baseMsg.getErrMsg());
             return;

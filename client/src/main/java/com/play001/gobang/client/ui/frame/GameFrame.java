@@ -85,7 +85,12 @@ public class GameFrame extends JFrame{
         //下面
         readyBtn = new JButton("准备");
         readyBtn.setBounds(50, 730, 100, 50);
-        readyBtn.setEnabled(false);
+        readyBtn.addActionListener(e->{
+            boolean ready = !gameData.getSelfPlayer().getReady();
+            readyBtn.setText(ready?"已准备":"准备");
+            gameData.getSelfPlayer().setReady(ready);
+            ServiceFactory.getGameService().readyChange(ready);
+        });
         pane.add(readyBtn);
 
         exitBtn = new JButton("退出");
@@ -157,10 +162,24 @@ public class GameFrame extends JFrame{
         }
     }
 
-
+    public void readyChange(String username, boolean ready){
+        if(ready){
+            msgArea.append("玩家:"+username+"已准备\r\n");
+        }else{
+            msgArea.append("玩家:"+username+"取消准备\r\n");
+        }
+    }
     //获取游戏数据失败
     public void getGameDataFailed(String errMsg) {
         logger.info(errMsg);
+    }
+
+    //开始游戏
+    public void startGame() {
+        msgArea.append("开始游戏\r\n");
+        readyBtn.setEnabled(false);
+        gameData.setStatus(GameStatus.START);
+        gameData.setChessboard(new ChessBoard());
     }
 
     //鼠标点击事件
