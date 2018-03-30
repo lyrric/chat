@@ -2,7 +2,6 @@ package com.play001.gobang.support.entity.msg.server;
 
 import com.play001.gobang.support.annotation.MsgAnnotation;
 import com.play001.gobang.support.entity.Room;
-import com.play001.gobang.support.entity.msg.client.ClientBaseMsg;
 import com.play001.gobang.support.entity.msg.client.ClientMsgType;
 
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.List;
 /**
  * 返回房间列表
  */
-@MsgAnnotation(msgType = ServerMsgType.ROMM_LIST_RES)
+@MsgAnnotation(msgType = ServerMsgType.ROOM_LIST_RES)
 public class RoomListResMsg extends ServerBaseMsg{
 
 

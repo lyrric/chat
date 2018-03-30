@@ -12,8 +12,8 @@ public class ClientMsgType {
     public static final short ROOM_CREATE_REQ = 3;
     //进入房间
     public static final short ROOM_ENTER_REQ = 4;
-    //准备游戏
-    public static final short READY_GAME = 5;
+    //状态改变
+    public static final short READY_CHANGE = 5;
     //开始游戏
     public static final short START_GAME = 6;
     //请求游戏数据
