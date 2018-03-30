@@ -1,5 +1,6 @@
 package com.play001.gobang.server;
 
+import com.play001.gobang.support.util.ClassUtil;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
@@ -30,8 +31,12 @@ public class Application {
      */
 
     @PostConstruct
-    public void run(){
+    public void run() throws Exception {
         logger.info("程序启动");
+        //初始化msg类和msgExecutor类
+        ClassUtil.initTypeToMsgClassMap("com.play001.gobang.support.entity.msg.client");
+        ClassUtil.initTypeToMsgExecClassMap("com.play001.gobang.server.exec");
+
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {

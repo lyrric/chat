@@ -1,5 +1,6 @@
-package com.play001.gobang.support.util;
+package com.play001.gobang.server.util;
 
+import com.play001.gobang.support.entity.msg.client.ClientBaseMsg;
 import com.play001.gobang.support.entity.msg.server.ServerBaseMsg;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -13,10 +14,10 @@ import java.util.List;
 /**
  * 消息解码
  */
-public class MsgDecoder extends ByteToMessageDecoder  {
+public class ClientMsgDecoder extends ByteToMessageDecoder  {
 
 
-    private final Logger logger = Logger.getLogger(MsgDecoder.class);
+    private final Logger logger = Logger.getLogger(ClientMsgDecoder.class);
     /**
      *
      * @param in 消息前四个字节为消息长度
@@ -41,7 +42,7 @@ public class MsgDecoder extends ByteToMessageDecoder  {
             return ;
         }
 
-        if(in.readableBytes() > length){
+        if(in.readableBytes() < length){
             logger.debug("长度不够");
             //读到的消息体长度如果小于我们传送过来的消息长度，则resetReaderIndex. 这个配合markReaderIndex使用的。把readIndex重置到mark的地方
             in.resetReaderIndex();
@@ -54,7 +55,7 @@ public class MsgDecoder extends ByteToMessageDecoder  {
         //反序列化
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(data);
         ObjectInputStream ois = new ObjectInputStream(byteArrayInputStream);
-        ServerBaseMsg msg = (ServerBaseMsg)ois.readObject();
+        ClientBaseMsg msg = (ClientBaseMsg)ois.readObject();
         out.add(msg);
     }
 }
