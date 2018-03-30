@@ -1,9 +1,12 @@
 package com.play001.gobang.client.handler;
 
+import com.play001.gobang.client.exec.ExecDispatcher;
+import com.play001.gobang.support.entity.msg.server.LoginResMsg;
 import com.play001.gobang.support.entity.msg.server.ServerBaseMsg;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.apache.log4j.Logger;
+
 
 public class OnReadHandler extends ChannelInboundHandlerAdapter {
 
@@ -11,8 +14,7 @@ public class OnReadHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         super.channelRead(ctx, msg);
-        ServerBaseMsg baseMsg = (ServerBaseMsg)msg;
-        System.out.println("收到消息, 消息类型="+baseMsg.getType());
+        ExecDispatcher.dispatch(msg);
     }
 
     @Override

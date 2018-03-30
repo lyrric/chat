@@ -7,10 +7,12 @@ public abstract class BaseExecutor implements Runnable{
     //消息
     protected ServerBaseMsg baseMsg;
 
-    public BaseExecutor() {
+    public ServerBaseMsg getBaseMsg() {
+        return baseMsg;
     }
 
-    protected BaseExecutor(ServerBaseMsg baseMsg) {
+    public void setBaseMsg(ServerBaseMsg baseMsg) {
         this.baseMsg = baseMsg;
     }
+
 }

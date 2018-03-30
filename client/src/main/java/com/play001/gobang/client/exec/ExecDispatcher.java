@@ -24,6 +24,7 @@ public class ExecDispatcher {
         ServerBaseMsg baseMsg = (ServerBaseMsg)msgObj;
         Class<?> execClass = ClassUtil.getExecutorClassByType(baseMsg.getType());
         BaseExecutor executor = (BaseExecutor)execClass.newInstance();
+        executor.setBaseMsg(baseMsg);
         executorService.submit(executor);
     }
 }

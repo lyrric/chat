@@ -1,8 +1,9 @@
 package com.play001.gobang.client.service;
 
+import com.google.gson.Gson;
 import com.play001.gobang.client.ClientChannelInitializer;
+import com.play001.gobang.client.service.factory.ServiceFactory;
 import com.play001.gobang.support.entity.msg.client.ClientBaseMsg;
-import com.play001.gobang.support.entity.msg.server.ServerBaseMsg;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
@@ -22,6 +23,7 @@ public class NettyService {
 
     private final Logger logger = Logger.getLogger(NettyService.class);
     private SocketChannel socketChannel = null;
+    private Gson gson = new Gson();
     /**
      * netty启动连接
      */
@@ -66,8 +68,10 @@ public class NettyService {
      * @param baseMsg 消息
      * @return 执行返回结果
      */
-    public ChannelFuture wirteAndFlush(ClientBaseMsg baseMsg){
+    public ChannelFuture send(ClientBaseMsg baseMsg){
+        //自动将user信息置入
         baseMsg.setUser(ServiceFactory.getUserService().getUser());
+        logger.info("发送消息:" + baseMsg.toString());
         return socketChannel.writeAndFlush(baseMsg);
     }
 }

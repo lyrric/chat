@@ -1,16 +1,16 @@
 package com.play001.gobang.client.service;
 
-import com.play001.gobang.support.entity.Client;
+import com.play001.gobang.support.entity.User;
 
 
 public class UserService {
-    private Client user;
+    private User user;
 
-    public Client getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Client user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
