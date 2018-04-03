@@ -1,37 +1,32 @@
 package com.play001.gobang.support.entity;
 
-import com.sun.deploy.util.ArrayUtil;
-
 import java.io.Serializable;
-import java.lang.reflect.Array;
-import java.util.*;
 
 public class ServerGameData implements Serializable{
     //游戏状态
     private Integer status;
     private Player player1;
     private Player player2;
-    //当前落子玩家名(该谁走棋)
-    private String moveUsername;
+
+    //当前落子玩家
+    private Player actionPlayer;
     //棋盘19*19
     private ChessBoard chessBoard;
 
-    public ServerGameData() {
-    }
-    public void initBoardData(){
-        //初始化棋盘
-    }
     /**
      * 加入玩家
      */
-    public void addPlayer(String username, boolean isFirst){
+    public void addPlayer(String username){
         if(player1 == null){
-            player1 = new Player(username, isFirst, false);
+            player1 = new Player(username, null, false);
         }else{
-            player2 = new Player(username, isFirst, false);;
+            player2 = new Player(username, null, false);;
         }
     }
 
+    public Player getBlacknessPlayer(){
+        return player1.getChessType().equals(ChessType.BLACKNESS)?player1:player2;
+    }
     //获取房间用户数
     public int playerCount(){
         int i = 0;
@@ -43,11 +38,22 @@ public class ServerGameData implements Serializable{
      * 落子
      * @param x x坐标1开始
      * @param y y坐标1开始
-     * @param color 颜色 see ChessboardItemStatus
+     * @param username ....
      * @return  当前位置无子则返回true,其它返回false
      */
-    public boolean moveChess(int x, int y, byte color){
-        return chessBoard.moveChess(x, y, color);
+    public boolean moveChess(String username, int x, int y){
+        return chessBoard.moveChess(x, y, getByUsername(username).getChessType());
+    }
+    //设置用户准备
+    public void setUserReady(String username, boolean isReady){
+        Player player = getByUsername(username);
+        if(player != null){
+            player.setReady(isReady);
+        }
+    }
+
+    public void setChessBoard(ChessBoard chessBoard) {
+        this.chessBoard = chessBoard;
     }
 
     public Integer getStatus() {
@@ -58,18 +64,22 @@ public class ServerGameData implements Serializable{
         this.status = status;
     }
 
-    public String getMoveUsername() {
-        return moveUsername;
+    public void setPlayer1(Player player1) {
+        this.player1 = player1;
     }
 
-    public void setMoveUsername(String moveUsername) {
-        this.moveUsername = moveUsername;
+    public void setPlayer2(Player player2) {
+        this.player2 = player2;
     }
 
-    public byte getChess(int x, int y){
+
+
+    public ChessType getChess(int x, int y){
         return chessBoard.getChess(x, y);
     }
-
+    public void initChessBord() {
+        chessBoard = new ChessBoard();
+    }
     public void removeByUsername(String username){
         if(player1 != null && player1.getUsername().equals(username)){
             player1=null;
@@ -78,7 +88,23 @@ public class ServerGameData implements Serializable{
         }
     }
 
+    public Player getActionPlayer() {
+        return actionPlayer;
+    }
 
+    public void setActionPlayer(Player actionPlayer) {
+        this.actionPlayer = actionPlayer;
+    }
+
+    //获取对手用户名
+    public  String getCompetitorName(String username){
+        //获取对方用户名
+        if(player1 != null && !player1.getUsername().equals(username)){
+            return player1.getUsername();
+        }else{
+            return player2.getUsername();
+        }
+    }
 
     public Player getPlayer1() {
         return player1;
@@ -88,14 +114,7 @@ public class ServerGameData implements Serializable{
         return player2;
     }
 
-    //设置先手
-    public void setFirst(String username){
-        getByUsername(username).setFirst(true);
-    }
-    //设置准备
-    public void setReady(String username){
-        getByUsername(username).setReady(true);
-    }
+
 
     public Player getByUsername(String username){
         if(player1 != null && player1.getUsername().equals(username)){
@@ -106,20 +125,13 @@ public class ServerGameData implements Serializable{
         return null;
     }
 
+    //判断双方是否都已经准备了
+    public boolean isAllReady(){
+        return (player1.getReady() && player2.getReady());
+    }
     public ChessBoard getChessBoard() {
         return chessBoard;
     }
-
-    public static class ChessboardItemStatus{
-        //空
-        public static final byte EMPTY = 0;
-        //黑棋
-        public static final byte WHITENESS = 1;
-        //白棋
-        public static final byte BLACKNESS = 2;
-    }
-
-
 
 
 }

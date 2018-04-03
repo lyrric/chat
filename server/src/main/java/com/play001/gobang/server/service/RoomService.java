@@ -14,11 +14,7 @@ public class RoomService {
     private static List<Room> roomList = new LinkedList<>();
     //房间最大ID
     private static Integer maxRoomId = 1;
-    static {
-        add("默认房间1");
-        add("默认房间2");
-        add("默认房间3");
-    }
+
     //创建房间
     public static synchronized Room add(String hostUsername){
         Room room = new Room(++maxRoomId, hostUsername, 0);

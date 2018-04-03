@@ -1,5 +1,6 @@
 package com.play001.gobang.client.handler;
 
+import com.play001.gobang.support.entity.ClientGameData;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -10,6 +11,7 @@ public class ExceptionHandler extends ChannelInboundHandlerAdapter {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         super.exceptionCaught(ctx, cause);
         cause.printStackTrace();
+
         ctx.close();
     }
 }

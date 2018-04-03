@@ -20,7 +20,7 @@ public class RoomFrame extends JFrame{
     private JButton createBtn;
     private JButton updateBtn;
     private JLabel tip;
-    private String [][] roomList = {{ "1", "张三", "1"},{ "2", "李四", "1"}};
+    private String [][] roomList;
     private String[] HEAD_TITLE = { "房间ID", "房主", "人数"};
     private JTable roomTable;
     private DefaultTableModel model;
@@ -92,6 +92,7 @@ public class RoomFrame extends JFrame{
 
     //获取房间列表失败
     public void getListFailed(String errMsg) {
+        this.setTitle("获取房间列表失败!");
         tip.setText(errMsg);
         updateBtn.setEnabled(true);
         JOptionPane.showMessageDialog(null,errMsg, "提示", JOptionPane.INFORMATION_MESSAGE);
@@ -99,6 +100,7 @@ public class RoomFrame extends JFrame{
 
     //获取别表成功
     public void updateList(List<Room> roomList) {
+        this.setTitle("获取房间列表成功, 更新时间:2018年4月3日 16:40:18");
         this.roomList = new String[roomList.size()][3];
         for(int i=0;i<roomList.size(); i++){
             Room room = roomList.get(i);
@@ -111,21 +113,28 @@ public class RoomFrame extends JFrame{
         tip.setText("获取房间列表成功");
     }
 
-
+    //二次显示需要初始化
+    public void init(){
+        updateBtn.setEnabled(true);
+        createBtn.setEnabled(true);
+        enterBtn.setEnabled(true);
+        ServiceFactory.getRoomService().getRoomList();
+        this.setTitle("正在获取房间列表...");
+    }
     //登陆监听器
     private class EnterListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            enterBtn.setEnabled(false);
-            createBtn.setEnabled(false);
-            updateBtn.setEnabled(false);
-            tip.setText("进入中,请稍后...");
             //获取房间id
             Integer roomId = getRoomId();
             if(roomId == null){
                 JOptionPane.showMessageDialog(null,"请选择进入的房间", "提示", JOptionPane.INFORMATION_MESSAGE);
                 return ;
             }
+            enterBtn.setEnabled(false);
+            createBtn.setEnabled(false);
+            updateBtn.setEnabled(false);
+            tip.setText("进入中,请稍后...");
             try {
                 //进入房间
                 ServiceFactory.getRoomService().enter(roomId);
@@ -142,7 +151,7 @@ public class RoomFrame extends JFrame{
      */
     public void enterFailed(String errMsg){
         tip.setText(errMsg);
-        //JOptionPane.showMessageDialog(null,errMsg, "提示", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, errMsg, "提示", JOptionPane.INFORMATION_MESSAGE);
         enterBtn.setEnabled(true);
         createBtn.setEnabled(true);
         updateBtn.setEnabled(true);

@@ -8,17 +8,15 @@ import com.play001.gobang.support.entity.msg.server.ServerBaseMsg;
  * 用户所发文本信息
  */
 @MsgAnnotation(msgType = ClientMsgType.TEXT)
-public class ClientTextMsg extends ServerBaseMsg {
+public class ClientTextMsg extends ClientBaseMsg{
 
-    private User formUser;
     private String text;
 
     public ClientTextMsg() {
     }
 
-    public ClientTextMsg(long time, User formUser, String text) {
+    public ClientTextMsg(long time, String text) {
         super(ClientMsgType.TEXT, time);
-        this.formUser = formUser;
         this.text = text;
     }
 
@@ -30,19 +28,10 @@ public class ClientTextMsg extends ServerBaseMsg {
         this.text = text;
     }
 
-    public User getFormUser() {
-        return formUser;
-    }
-
-    public void setFormUser(User formUser) {
-        this.formUser = formUser;
-    }
-
     @Override
     public String toString() {
         return "ClientTextMsg{" +
-                "formUser=" + formUser +
-                ", text='" + text + '\'' +
+                "text='" + text + '\'' +
                 '}';
     }
 }

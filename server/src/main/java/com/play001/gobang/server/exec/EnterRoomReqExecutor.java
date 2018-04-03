@@ -5,8 +5,9 @@ import com.play001.gobang.server.service.GameService;
 import com.play001.gobang.server.service.RoomService;
 import com.play001.gobang.support.annotation.MsgAnnotation;
 import com.play001.gobang.support.entity.Room;
-import com.play001.gobang.support.entity.msg.client.ClientBaseMsg;
+import com.play001.gobang.support.entity.ServerGameData;
 import com.play001.gobang.support.entity.msg.client.ClientMsgType;
+import com.play001.gobang.support.entity.msg.client.EnterRoomReqMsg;
 import com.play001.gobang.support.entity.msg.server.ServerBaseMsg;
 import com.play001.gobang.support.entity.msg.server.ServerMsgType;
 import com.play001.gobang.support.entity.msg.server.UserEnterMsg;
@@ -18,17 +19,17 @@ import org.apache.log4j.Logger;
  * 进入房间
  */
 @MsgAnnotation(msgType = ClientMsgType.ROOM_ENTER_REQ)
-public class RoomEnterReqExecutor extends BaseExecutor {
+public class EnterRoomReqExecutor extends BaseExecutor {
 
-    private final Logger logger = Logger.getLogger(RoomEnterReqExecutor.class);
+    private final Logger logger = Logger.getLogger(EnterRoomReqExecutor.class);
 
     @Override
     public void run() {
         ServerBaseMsg resMsg = new ServerBaseMsg(ServerMsgType.ROOM_ENTER_RES, System.currentTimeMillis());
         try {
-            ClientBaseMsg reqMsg = (ClientBaseMsg)baseMsg;
-            String username =  reqMsg.getUser().getUsername();
-            Integer roomId = reqMsg.getUser().getRoomId();
+            String username =  baseMsg.getUser().getUsername();
+            EnterRoomReqMsg reqMsg = (EnterRoomReqMsg)baseMsg;
+            Integer roomId = reqMsg.getRoomId();
             //判断房间是否存在
             if(roomId == null){
                 resMsg.setErrMsg("房间不存在");
@@ -48,13 +49,14 @@ public class RoomEnterReqExecutor extends BaseExecutor {
                     //判断是否需要通知另一个人
                     if(room.getUserCount() == 2){
                         //获取对手名字
-                        String competitorName = GameService.getOtherUsername(roomId, username);
+                        ServerGameData gameData = GameService.getGameData(roomId);
+                        String competitorName = gameData.getCompetitorName(username);
                         Channel competitorChannel = ClientService.getByUsername(competitorName).getChannel();
                         //发送游戏最新数据
                         UserEnterMsg userEnterMsg = new UserEnterMsg(System.currentTimeMillis(), username);
                         competitorChannel.writeAndFlush(userEnterMsg);
                     }
-                    logger.info("用户:" + username+"进入房间:" + reqMsg.getUser().getRoomId());
+                    logger.info("用户:" + username+"进入房间:" + roomId);
                 }
             }
         }catch (Exception e){

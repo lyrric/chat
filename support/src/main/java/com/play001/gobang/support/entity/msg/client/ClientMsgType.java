@@ -17,10 +17,13 @@ public class ClientMsgType {
     //开始游戏
     public static final short START_GAME = 6;
     //请求游戏数据
-    public static final short GAME_DATA_REQ = 7;
-
+    public static final short COMPETITOR_DATA_REQ = 7;
+    //落子
+    public static final short MOVE_CHESS = 8;
     //文本消息
-    public static final short TEXT = 8;
+    public static final short TEXT = 9;
+    //离开房间
+    public static final short EXIT_ROOM = 10;
 /*    //落子
     public static final short MOVE= 5;
     //游戏结束

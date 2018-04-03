@@ -26,7 +26,6 @@ public class ExecDispatcher {
     //判断消息类型,分发任务
     public static void dispatch(Channel channel, Object msgObj) throws IllegalAccessException, InstantiationException {
         ClientBaseMsg baseMsg = (ClientBaseMsg)msgObj;
-        logger.info("收到消息:"+baseMsg.toString());
         Class<?> execClass = ClassUtil.getExecutorClassByType(baseMsg.getType());
         BaseExecutor executor = (BaseExecutor)execClass.newInstance();
         executor.setBaseMsg(baseMsg);

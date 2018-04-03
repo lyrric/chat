@@ -3,30 +3,30 @@ package com.play001.gobang.client.exec;
 import com.play001.gobang.client.ui.UIFactory;
 import com.play001.gobang.client.ui.frame.GameFrame;
 import com.play001.gobang.support.annotation.MsgAnnotation;
-import com.play001.gobang.support.entity.msg.server.GameDataResMsg;
+import com.play001.gobang.support.entity.msg.server.CompetitorDataResMsg;
 import com.play001.gobang.support.entity.msg.server.ServerMsgType;
 import org.apache.log4j.Logger;
 
 
 /**
- * 返回房间列表
+ * 对手信息
  */
-@MsgAnnotation(msgType = ServerMsgType.GAME_DATA_RES)
-public class GameDataResExecutor extends BaseExecutor {
+@MsgAnnotation(msgType = ServerMsgType.COMPETITOR_DATA_RES)
+public class CompetitorDataResExec extends BaseExecutor {
 
-    private final Logger logger = Logger.getLogger(GameDataResExecutor.class);
+    private final Logger logger = Logger.getLogger(CompetitorDataResExec.class);
 
     @Override
     public void run() {
         GameFrame gameFrame = UIFactory.getGameFrame();
         if(baseMsg.getErrMsg() != null){
-            logger.info("获取游戏数据失败:"+baseMsg.getErrMsg());
+            logger.info("获取对手信息失败:"+baseMsg.getErrMsg());
             gameFrame.getGameDataFailed(baseMsg.getErrMsg());
             return;
         }
-        GameDataResMsg resMsg = (GameDataResMsg)baseMsg;
-        logger.info("获取房间数据成功");
+        CompetitorDataResMsg resMsg = (CompetitorDataResMsg)baseMsg;
+        logger.info("获取对手信息成功, 对手名:"+resMsg.getCompetitor());
         //进入房间成功后,先向
-        gameFrame.updateGameData(resMsg.getGameData());
+        gameFrame.setCompetitor(resMsg.getCompetitor());
     }
 }

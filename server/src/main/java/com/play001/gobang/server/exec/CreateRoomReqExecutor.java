@@ -12,9 +12,9 @@ import org.apache.log4j.Logger;
  * 创建房间
  */
 @MsgAnnotation(msgType = ClientMsgType.ROOM_CREATE_REQ)
-public class RoomCreateReqExecutor extends BaseExecutor {
+public class CreateRoomReqExecutor extends BaseExecutor {
 
-    private final Logger logger = Logger.getLogger(RoomCreateReqExecutor.class);
+    private final Logger logger = Logger.getLogger(CreateRoomReqExecutor.class);
 
     @Override
     public void run() {

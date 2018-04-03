@@ -35,4 +35,11 @@ public class ReadyChangeResMsg extends ServerBaseMsg{
         this.ready = ready;
     }
 
+    @Override
+    public String toString() {
+        return "ReadyChangeResMsg{" +
+                "username='" + username + '\'' +
+                ", ready=" + ready +
+                '}';
+    }
 }

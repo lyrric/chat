@@ -15,6 +15,10 @@ public class ServerBaseMsg implements Serializable{
     public ServerBaseMsg() {
     }
 
+    public ServerBaseMsg(short type) {
+        this.type = type;
+    }
+
     public ServerBaseMsg(short type, long time) {
         this.type = type;
         this.time = time;

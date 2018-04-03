@@ -37,6 +37,14 @@ public class ClientService {
     public static ClientData getByUsername(String username){
         return clients.get(username);
     }
+    public static ClientData getByChannel(Channel channel){
+        for(Map.Entry<String, ClientData> entry : clients.entrySet()){
+            if(entry.getValue().getChannel().id().equals(channel.id())) {
+                return entry.getValue();
+            }
+        }
+        return null;
+    }
     public static void enterRoom(String username, Integer roomId){
         clients.get(username).setRoomId(roomId);
     }

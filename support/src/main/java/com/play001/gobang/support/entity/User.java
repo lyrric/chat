@@ -7,8 +7,6 @@ import java.io.Serializable;
 public class User implements Serializable{
     private String username;
     private String userKey;
-    //用户所在房间Id
-    private Integer roomId;
     //登陆时间
     private Long loginTime;
 
@@ -34,20 +32,12 @@ public class User implements Serializable{
         this.loginTime = loginTime;
     }
 
-    public Integer getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(Integer roomId) {
-        this.roomId = roomId;
-    }
 
     @Override
     public String toString() {
         return "User{" +
                 "username='" + username + '\'' +
                 ", userKey='" + userKey + '\'' +
-                ", roomId=" + roomId +
                 ", loginTime=" + loginTime +
                 '}';
     }

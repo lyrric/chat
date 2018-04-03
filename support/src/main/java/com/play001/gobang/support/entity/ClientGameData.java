@@ -7,6 +7,7 @@ import java.util.Arrays;
  * 客户端数据类
  */
 public class ClientGameData implements Serializable{
+    private Integer roomId;
     //游戏状态
     private Integer status;
     //对手
@@ -36,11 +37,11 @@ public class ClientGameData implements Serializable{
      * 落子
      * @param x x坐标1开始
      * @param y y坐标1开始
-     * @param color 颜色 see ChessboardItemStatus
+     * @param chessType 棋子类型
      * @return  当前位置无子则返回true,其它返回false
      */
-    public boolean moveChess(int x, int y, byte color){
-        return chessboard.moveChess(x, y, color);
+    public boolean moveChess(int x, int y, ChessType chessType){
+        return chessboard.moveChess(x, y, chessType);
     }
 
     public Integer getStatus() {
@@ -63,7 +64,10 @@ public class ClientGameData implements Serializable{
         this.selfPlayer = selfPlayer;
     }
 
-    public byte getChess(int x, int y) {
+    public ChessType getChess(int x, int y) {
+        if(chessboard == null){
+            return null;
+        }
         return chessboard.getChess(x, y);
     }
 

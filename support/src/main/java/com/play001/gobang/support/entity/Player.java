@@ -6,17 +6,17 @@ public class Player implements Serializable{
 
     //对手名字
     private String username;
-    //是否先手
-    private Boolean isFirst;
+    //黑棋or白棋
+    private ChessType chessType;
     //是否准备
     private Boolean isReady;
 
     public Player() {
     }
 
-    public Player(String username, Boolean isFirst, Boolean isReady) {
+    public Player(String username, ChessType chessType, Boolean isReady) {
         this.username = username;
-        this.isFirst = isFirst;
+        this.chessType = chessType;
         this.isReady = isReady;
     }
 
@@ -28,12 +28,12 @@ public class Player implements Serializable{
         this.username = username;
     }
 
-    public Boolean getFirst() {
-        return isFirst;
+    public ChessType getChessType() {
+        return chessType;
     }
 
-    public void setFirst(Boolean first) {
-        isFirst = first;
+    public void setChessType(ChessType chessType) {
+        this.chessType = chessType;
     }
 
     public Boolean getReady() {

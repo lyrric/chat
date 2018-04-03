@@ -1,6 +1,5 @@
 package com.play001.gobang.client.exec;
 
-import com.play001.gobang.client.service.factory.ServiceFactory;
 import com.play001.gobang.client.ui.UIFactory;
 import com.play001.gobang.client.ui.frame.RoomFrame;
 import com.play001.gobang.support.annotation.MsgAnnotation;
@@ -12,9 +11,9 @@ import org.apache.log4j.Logger;
  * 登陆返回key
  */
 @MsgAnnotation(msgType = ServerMsgType.ROOM_ENTER_RES)
-public class RoomEnterExecutor extends BaseExecutor {
+public class EnterRoomExec extends BaseExecutor {
 
-    private final Logger logger = Logger.getLogger(RoomEnterExecutor.class);
+    private final Logger logger = Logger.getLogger(EnterRoomExec.class);
 
 
     @Override
@@ -22,7 +21,6 @@ public class RoomEnterExecutor extends BaseExecutor {
         RoomFrame roomFrame = UIFactory.getRoomFrame();
         if(baseMsg.getErrMsg() != null){
             logger.info("进入房间失败:"+baseMsg.getErrMsg());
-            ServiceFactory.getUserService().getUser().setRoomId(null);
             roomFrame.enterFailed(baseMsg.getErrMsg());
             return;
         }

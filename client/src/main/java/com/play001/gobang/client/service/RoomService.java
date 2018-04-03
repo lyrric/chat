@@ -5,6 +5,7 @@ import com.play001.gobang.client.ui.UIFactory;
 import com.play001.gobang.support.entity.User;
 import com.play001.gobang.support.entity.msg.client.ClientBaseMsg;
 import com.play001.gobang.support.entity.msg.client.ClientMsgType;
+import com.play001.gobang.support.entity.msg.client.EnterRoomReqMsg;
 import org.apache.log4j.Logger;
 
 public class RoomService {
@@ -42,8 +43,7 @@ public class RoomService {
     public void enter(Integer roomId){
         User user =  ServiceFactory.getUserService().getUser();
         try {
-            ClientBaseMsg reqMsg = new ClientBaseMsg(ClientMsgType.ROOM_ENTER_REQ, System.currentTimeMillis());
-            user.setRoomId(roomId);
+            EnterRoomReqMsg reqMsg = new EnterRoomReqMsg(System.currentTimeMillis(), roomId);
             ServiceFactory.getNettyService().send(reqMsg);
         }catch (Exception e){
             e.printStackTrace();

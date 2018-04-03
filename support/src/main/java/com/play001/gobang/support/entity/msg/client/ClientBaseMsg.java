@@ -14,12 +14,17 @@ public class ClientBaseMsg implements Serializable{
     private short type;
     private long time;
     public ClientBaseMsg() {
-    }
 
+    }
+    public ClientBaseMsg(short type) {
+        this.type = type;
+    }
     public ClientBaseMsg(short type, long time) {
         this.type = type;
         this.time = time;
     }
+
+
 
     public short getType() {
         return type;
