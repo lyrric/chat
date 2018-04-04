@@ -95,6 +95,7 @@ public class LoginFrame extends JFrame{
         this.setVisible(false);
         //显示房间输入
         UIFactory.getRoomFrame().setVisible(true);
+        UIFactory.getRoomFrame().init();
     }
 
 }
