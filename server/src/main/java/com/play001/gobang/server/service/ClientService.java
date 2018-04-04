@@ -26,12 +26,12 @@ public class ClientService {
     }
     //移除
     public static void removeByChannel(Channel channel){
-        clients.forEach((key, value)->{
-            if(value.getChannel().id().equals(channel.id())){
-                clients.remove(key);
-                logger.info(value.getUsername()+", 下线了");
+        for(Map.Entry<String, ClientData> entry : clients.entrySet()){
+            if(entry.getValue().getChannel().id().equals(channel.id())){
+                clients.remove(entry.getKey());
+                return;
             }
-        });
+        }
     }
     //获取
     public static ClientData getByUsername(String username){

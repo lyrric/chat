@@ -29,6 +29,7 @@ public class LoginReqExecutor extends BaseExecutor {
             //判断登录名是否重复
             if(ClientService.getByUsername(username) != null){
                 loginResMsg.setErrMsg("用户名已经被使用了!");
+
             }else{
                 //生成key
                 String userKey = UUID.randomUUID().toString();

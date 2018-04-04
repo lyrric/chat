@@ -37,27 +37,34 @@ public class EnterRoomReqExecutor extends BaseExecutor {
                 Room room = RoomService.get(roomId);
                 if(room == null){
                     resMsg.setErrMsg("房间不存在");
-                }else if(room.getUserCount() > 1){
-                    resMsg.setErrMsg("房间已满");
-                }else{
-                    //进入房间
-                    GameService.add(roomId, username);
-                    //更新用户状态
-                    ClientService.enterRoom(username, roomId);
-                    //用户数量+1
-                    room.increaseUserCount();
-                    //判断是否需要通知另一个人
-                    if(room.getUserCount() == 2){
-                        //获取对手名字
-                        ServerGameData gameData = GameService.getGameData(roomId);
-                        String competitorName = gameData.getCompetitorName(username);
-                        Channel competitorChannel = ClientService.getByUsername(competitorName).getChannel();
-                        //发送游戏最新数据
-                        UserEnterMsg userEnterMsg = new UserEnterMsg(System.currentTimeMillis(), username);
-                        competitorChannel.writeAndFlush(userEnterMsg);
-                    }
-                    logger.info("用户:" + username+"进入房间:" + roomId);
+                    channel.writeAndFlush(resMsg);
+                    return;
                 }
+                //同步锁住房间信息
+                synchronized (room){
+                    if(room.getUserCount() > 1){
+                        resMsg.setErrMsg("房间已满");
+                    }else{
+                        //进入房间
+                        GameService.add(roomId, username);
+                        //更新用户状态
+                        ClientService.enterRoom(username, roomId);
+                        //用户数量+1
+                        room.increaseUserCount();
+                        //判断是否需要通知另一个人
+                        if(room.getUserCount() == 2){
+                            //获取对手名字
+                            ServerGameData gameData = GameService.getGameData(roomId);
+                            String competitorName = gameData.getCompetitorName(username);
+                            Channel competitorChannel = ClientService.getByUsername(competitorName).getChannel();
+                            //发送游戏最新数据
+                            UserEnterMsg userEnterMsg = new UserEnterMsg(System.currentTimeMillis(), username);
+                            competitorChannel.writeAndFlush(userEnterMsg);
+                        }
+                        logger.info("用户:" + username+"进入房间:" + roomId);
+                    }
+                }
+
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -65,6 +72,5 @@ public class EnterRoomReqExecutor extends BaseExecutor {
         }
         //返回结果给客户端
         channel.writeAndFlush(resMsg);
-
     }
 }
