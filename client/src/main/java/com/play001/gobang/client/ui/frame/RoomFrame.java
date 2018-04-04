@@ -28,6 +28,7 @@ public class RoomFrame extends JFrame{
         this.setTitle("请输入房间号");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(500,500);
+        this.setResizable(false);
         //居中显示
         this.setLocationRelativeTo(null);
         JPanel panel = (JPanel) this.getContentPane();

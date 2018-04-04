@@ -54,6 +54,7 @@ public class GameFrame extends JFrame{
         this.setLocationRelativeTo(null);
         this.setLayout(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setResizable(false);
         Container pane = this.getContentPane();
         //加载图片
         URL url = ClassLoader.class.getResource("/image/board.jpg");

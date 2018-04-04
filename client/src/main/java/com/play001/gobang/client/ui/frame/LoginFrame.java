@@ -25,6 +25,7 @@ public class LoginFrame extends JFrame{
         this.setSize(400,250);
         //居中显示, 需要在setSize后面
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         JPanel panel = (JPanel) this.getContentPane();
         panel.setLayout(null);
         //用户名
