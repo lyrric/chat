@@ -301,7 +301,7 @@ public class GameFrame extends JFrame{
                 int y_ = (y + 10) / LATTICE_SIZE;
                 System.out.println("棋盘坐标 :x=" + x_ + ", y=" + y_);
                 //落子
-                if(gameData.moveChess(x_, y_,ChessType.WHITENESS)){
+                if(gameData.moveChess(x_, y_,gameData.getSelfPlayer().getChessType())){
                     gameData.setMyTurn(false);
                     statusLabel.setText("当前执子玩家:"+gameData.getCompetitor().getUsername());
                     //发送消息
