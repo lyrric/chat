@@ -90,7 +90,7 @@ public class LoginFrame extends JFrame{
      * 登陆成功后事件
      */
     public void loginSuccess(){
-        JOptionPane.showMessageDialog(null,"登陆成功", "提示", JOptionPane.INFORMATION_MESSAGE);
+        //JOptionPane.showMessageDialog(null,"登陆成功", "提示", JOptionPane.INFORMATION_MESSAGE);
         this.setVisible(false);
         //显示房间输入
         UIFactory.getRoomFrame().setVisible(true);

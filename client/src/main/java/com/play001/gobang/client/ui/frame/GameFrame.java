@@ -15,7 +15,7 @@ public class GameFrame extends JFrame{
 
     private Logger logger = Logger.getLogger(GameFrame.class);
     //棋盘左上角位置
-    private final Point BOARD_ZERO_POINT = new Point(60, 38);
+    private final Point BOARD_ZERO_POINT = new Point(60, 67);
     //棋盘大小14*50
     private final int BOARD_WIDTH = 700;
     private final int BOARD_HEIGHT = 659;
@@ -41,6 +41,9 @@ public class GameFrame extends JFrame{
     private JButton sendBtn;
     //游戏数据
     private ClientGameData gameData;
+    private  Image image;
+
+
     public GameFrame() throws HeadlessException {
         //窗体大小
         final int WINDOW_WIDTH = 1200;
@@ -125,7 +128,7 @@ public class GameFrame extends JFrame{
         });
         pane.add(exitBtn);
         //监听鼠标按下事件
-        pane.addMouseListener(new ClickListener());
+        this.addMouseListener(new ClickListener());
     }
 
     //每次显示界面都要执行初始化
@@ -182,10 +185,14 @@ public class GameFrame extends JFrame{
 
     @Override
     public void paint(Graphics g) {
-        super.paint(g);
         Graphics pane = getContentPane().getGraphics();
+        if(image == null){
+            image = createImage(getContentPane().getWidth(), getContentPane().getHeight());
+        }
+        Graphics imageGraphics = image.getGraphics();
+        super.paint(imageGraphics);
         //画棋盘
-        pane.drawImage(boardImage, 26, 21, BOARD_WIDTH, BOARD_HEIGHT, this);
+        imageGraphics.drawImage(boardImage, 26, 50, BOARD_WIDTH, BOARD_HEIGHT, this);
         //画棋子
         if(gameData != null){
             for(int x = 0;x < 19;x++){
@@ -197,15 +204,18 @@ public class GameFrame extends JFrame{
                         p.x = (x * LATTICE_SIZE) + BOARD_ZERO_POINT.x - CHESS_SIZE/2;
                         p.y = (y * LATTICE_SIZE) + BOARD_ZERO_POINT.y - CHESS_SIZE/2;
                         if(chess == ChessType.WHITENESS){
-                            pane.drawImage(whiteChessImage, p.x, p.y, CHESS_SIZE, CHESS_SIZE, this);
+                            imageGraphics.drawImage(whiteChessImage, p.x, p.y, CHESS_SIZE, CHESS_SIZE, this);
                         }else{
-                            pane.drawImage(blackChessImage, p.x, p.y, CHESS_SIZE, CHESS_SIZE, this);
+                            imageGraphics.drawImage(blackChessImage, p.x, p.y, CHESS_SIZE, CHESS_SIZE, this);
                         }
                     }
                 }
             }
         }
+        g.drawImage(image, 0 , 0,null);
     }
+
+
 
     //玩家准备事件
     public void readyChange(String username, boolean ready){
@@ -291,7 +301,7 @@ public class GameFrame extends JFrame{
                 int y_ = (y + 10) / LATTICE_SIZE;
                 System.out.println("棋盘坐标 :x=" + x_ + ", y=" + y_);
                 //落子
-                if(gameData.moveChess(x_, y_, gameData.getSelfPlayer().getChessType())){
+                if(gameData.moveChess(x_, y_,ChessType.WHITENESS)){
                     gameData.setMyTurn(false);
                     statusLabel.setText("当前执子玩家:"+gameData.getCompetitor().getUsername());
                     //发送消息

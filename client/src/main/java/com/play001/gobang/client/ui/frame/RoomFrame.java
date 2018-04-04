@@ -78,7 +78,7 @@ public class RoomFrame extends JFrame{
     public void createSuccess(Integer roomId) {
         tip.setText("创建成功,正在进入,请稍后...");
         createBtn.setEnabled(true);
-        JOptionPane.showMessageDialog(null,"创建成功, 房间ID:"+roomId, "提示", JOptionPane.INFORMATION_MESSAGE);
+        //JOptionPane.showMessageDialog(null,"创建成功, 房间ID:"+roomId, "提示", JOptionPane.INFORMATION_MESSAGE);
         //进入房间
         ServiceFactory.getRoomService().enter(roomId);
     }
@@ -160,7 +160,7 @@ public class RoomFrame extends JFrame{
      * 进入成功后事件
      */
     public void enterSuccess(){
-        JOptionPane.showMessageDialog(null,"进入成功", "提示", JOptionPane.INFORMATION_MESSAGE);
+        //JOptionPane.showMessageDialog(null,"进入成功", "提示", JOptionPane.INFORMATION_MESSAGE);
         this.setVisible(false);
         //显示游戏界面
         GameFrame gameFrame = UIFactory.getGameFrame();
